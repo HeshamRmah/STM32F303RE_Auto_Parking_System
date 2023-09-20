@@ -1,10 +1,11 @@
 #MicroXplorer Configuration settings - do not modify
-CAD.formats=
-CAD.pinconfig=
+CAD.formats=[]
+CAD.pinconfig=Project naming
 CAD.provider=
 FREERTOS.FootprintOK=true
-FREERTOS.IPParameters=Tasks01,configUSE_NEWLIB_REENTRANT,FootprintOK
-FREERTOS.Tasks01=defaultTask,55,128,DefaultTask,Default,NULL,Dynamic,NULL,NULL;ultrasonics_rea,40,128,RTOS_Ultrasonics_Read,Default,NULL,Dynamic,NULL,NULL;car_next_step,24,128,RTOS_Car_Next_Step,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.IPParameters=Tasks01,configUSE_NEWLIB_REENTRANT,FootprintOK,configMAX_TASK_NAME_LEN
+FREERTOS.Tasks01=defaultTask,55,128,DefaultTask,Default,NULL,Dynamic,NULL,NULL;ultrasonics_read,40,128,RTOS_Ultrasonics_Read,Default,NULL,Dynamic,NULL,NULL;car_next_step,24,128,RTOS_Car_Next_Step,Default,NULL,Dynamic,NULL,NULL;bluetooth_recive,33,128,RTOS_Bluetooth_Recive,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.configMAX_TASK_NAME_LEN=20
 FREERTOS.configUSE_NEWLIB_REENTRANT=1
 File.Version=6
 GPIO.groupedBy=Group By Peripherals

@@ -13,7 +13,12 @@
 #include "../ECU_std_types.h"
 
 /* ----------------- Macro Declarations -----------------*/
-
+#define FRONT_ULTRASONIC_INDEX         0
+#define RIGHT_FRONT_ULTRASONIC_INDEX   1
+#define RIGHT_REAR_ULTRASONIC_INDEX    2
+#define LEFT_FRONT_ULTRASONIC_INDEX    3
+#define LEFT_REAR_ULTRASONIC_INDEX     4
+#define REAR_ULTRASONIC_INDEX          5
 
 /* ----------------- Macro Functions Declarations -----------------*/
 
@@ -35,6 +40,6 @@ typedef struct{
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Bluetooth_ReciveData(bluetooth_obj_t *bluetooth_obj);
+ECU_StatusTypeDef ECU_Bluetooth_ReciveData(const bluetooth_obj_t *bluetooth_obj);
 
 #endif /* BLUETOOTH_BLUETOOTH_H_ */

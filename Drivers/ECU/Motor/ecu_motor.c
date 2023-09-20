@@ -33,14 +33,6 @@ ECU_StatusTypeDef ECU_Motor_GeneratePWM(motor_obj_t *motor_obj){
 		return ECU_ERROR;
 	}
 
-	/*	TIM_OC_InitTypeDef
-		OCPolarity = TIM_OCPOLARITY_LOW
-		OCNPolarity = TIM_OCNPOLARITY_HIGH
-		OCFastMode = TIM_OCFAST_DISABLE
-		OCIdleState = TIM_OCIDLESTATE_RESET
-		OCNIdleState = TIM_OCNIDLESTATE_RESET
-	*/
-
 	/* Convert Frequency (Hz) to Period (us) */
 	Period = (uint32_t)(1000000 /(motor_obj->speed.Frequency));
 
@@ -72,6 +64,34 @@ ECU_StatusTypeDef ECU_Motor_StopPWM(motor_obj_t *motor_obj){
 
 	/* Stop the PWM signal generation */
 	HAL_TIM_PWM_Stop(motor_obj->htim, motor_obj->PWM_Channel);
+
+	return ECU_OK;
+}
+
+/**
+  * @brief  Change the Speed of the car.
+  *
+  * @param  motor_obj: Motor handle
+  * @param  speed: Speed of motor
+  *         the can be either ( &high_speed or &medium_speed or &low_speed )
+  *
+  * @retval ECU status
+  */
+ECU_StatusTypeDef ECU_Motor_ChangeSpeed(motor_obj_t *motor_obj, const motor_speed_t *speed){
+	/* Check NULL Pointer */
+	if ( (NULL == motor_obj) || (NULL == speed))
+	{
+		return ECU_ERROR;
+	}
+
+	/* Update the Frequency of PWM Signal */
+	motor_obj->speed.Frequency = speed->Frequency;
+
+	/* Update the Duty Cycle of PWM Signal */
+	motor_obj->speed.Duty_Cycle = speed->Duty_Cycle;
+
+	/* Starts the Updated PWM signal generation */
+	ECU_Motor_GeneratePWM(motor_obj);
 
 	return ECU_OK;
 }

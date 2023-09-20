@@ -62,6 +62,11 @@ ECU_StatusTypeDef ECU_Motor_GeneratePWM(motor_obj_t *motor_obj);
 ECU_StatusTypeDef ECU_Motor_StopPWM(motor_obj_t *motor_obj);
 
 /**
+  * @brief  Change the Speed of the car.
+  */
+ECU_StatusTypeDef ECU_Motor_ChangeSpeed(motor_obj_t *motor_obj, const motor_speed_t *speed);
+
+/**
   * @brief  Stop the PWM signal generation.
   */
 ECU_StatusTypeDef ECU_Motor_NextStep(motor_obj_t *motor_obj, uint8_t *direction);

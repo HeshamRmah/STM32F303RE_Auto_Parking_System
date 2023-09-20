@@ -13,7 +13,8 @@ uint8_t temp = 0;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	//printf("----------------------> is %c\n",temp);
-	if((temp == 'F') || (temp == 'B') || (temp == 'G') || (temp == 'I') || (temp == 'H') || (temp == 'J') || (temp == 'S') || (temp == 'R') || (temp == 'L')){
+	if( (temp == 'F') || (temp == 'B') || (temp == 'G') || (temp == 'I') || (temp == 'H') || (temp == 'J')
+			 || (temp == 'R') || (temp == 'L') || (temp == 'S') ){
 		Bluetooth_RX_Data = temp;
 		//printf("ISR is %c\n",Bluetooth_RX_Data);
 	}
@@ -29,7 +30,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Bluetooth_ReciveData(bluetooth_obj_t *bluetooth_obj){
+ECU_StatusTypeDef ECU_Bluetooth_ReciveData(const bluetooth_obj_t *bluetooth_obj){
 
 	/* Check NULL Pointer */
 	if (NULL == bluetooth_obj)
