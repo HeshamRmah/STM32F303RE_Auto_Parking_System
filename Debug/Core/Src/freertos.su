@@ -1,0 +1,4 @@
+../Core/Src/freertos.c:202:6:MX_FREERTOS_Init	8	static
+../Core/Src/freertos.c:250:6:DefaultTask	16	static
+../Core/Src/freertos.c:275:6:RTOS_Ultrasonics_Read	16	static
+../Core/Src/freertos.c:316:6:RTOS_Car_Next_Step	16	static

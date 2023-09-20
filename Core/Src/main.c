@@ -18,19 +18,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../../ECU/ECU_std_types.h"
-#include "../../MCAL/GPIO/mcal_gpio.h"
-#include "../../Drivers/ECU/Motor/ecu_motor.h"
-#include "../../Drivers/ECU/LCD/hal_lcd.h"
-#include "../../Drivers/ECU/Ultrasonic/ultrasonic.h"
-#include "../../Drivers/ECU/Bluetooth/bluetooth.h"
-
 
 /* USER CODE END Includes */
 
@@ -52,116 +46,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-chr_lcd_4bit_t lcd = {
-	.lcd_data[0].port = GPIOB,
-	.lcd_data[0].pin = GPIO_PIN_10,
-
-	.lcd_data[1].port = GPIOB,
-	.lcd_data[1].pin = GPIO_PIN_11,
-
-	.lcd_data[2].port = GPIOB,
-	.lcd_data[2].pin = GPIO_PIN_12,
-
-	.lcd_data[3].port = GPIOB,
-	.lcd_data[3].pin = GPIO_PIN_13,
-
-	.lcd_rs.port = GPIOB,
-	.lcd_rs.pin = GPIO_PIN_1,
-
-	.lcd_en.port = GPIOB,
-	.lcd_en.pin = GPIO_PIN_2,
-};
-
-ultrasonic_obj_t ultrasonic_1 = {
-		.htim = &htim1,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.IC_Channel = TIM_CHANNEL_2,
-};
-
-ultrasonic_obj_t ultrasonic_2 = {
-		.htim = &htim2,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.IC_Channel = TIM_CHANNEL_2
-};
-
-ultrasonic_obj_t ultrasonic_3 = {
-		.htim = &htim3,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.IC_Channel = TIM_CHANNEL_2
-};
-
-ultrasonic_obj_t ultrasonic_4 = {
-		.htim = &htim4,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.IC_Channel = TIM_CHANNEL_2
-};
-
-ultrasonic_obj_t ultrasonic_5 = {
-		.htim = &htim8,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.IC_Channel = TIM_CHANNEL_2
-};
-
-ultrasonic_obj_t ultrasonic_6 = {
-		.htim = &htim15,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.IC_Channel = TIM_CHANNEL_2
-};
-
-motor_obj_t steering_motor = {
-		.htim = &htim16,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.speed.Frequency = 100,
-		.speed.Duty_Cycle = 0.5,
-};
-
-motor_obj_t moving_motor = {
-		.htim = &htim16,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.speed.Frequency = 1000,
-		.speed.Duty_Cycle = 0.5,
-};
-
-bluetooth_obj_t bluetooth = {
-		.huart = &huart4,
-		.Numberofdata = 1,
-};
-
-
-motor_obj_t test1 = {
-		.htim = &htim1,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.speed.Frequency = 1000,
-		.speed.Duty_Cycle = 0.01,
-};
-
-motor_obj_t test2 = {
-		.htim = &htim2,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.speed.Frequency = 100,
-		.speed.Duty_Cycle = 0.25,
-};
-
-motor_obj_t test3 = {
-		.htim = &htim3,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.speed.Frequency = 100,
-		.speed.Duty_Cycle = 0.75,
-};
-
-motor_obj_t test4 = {
-		.htim = &htim4,
-		.PWM_Channel = TIM_CHANNEL_1,
-		.speed.Frequency = 1000,
-		.speed.Duty_Cycle = 0.5,
-};
-
-
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -210,62 +100,20 @@ int main(void)
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
 
-  //ECU_Motor_GeneratePWM(&moving_motor);
-
-//  ECU_Motor_GeneratePWM(&steering_motor);
-//	ECU_Motor_GeneratePWM(&test1);
-//	ECU_Motor_GeneratePWM(&test2);
-//	ECU_Motor_GeneratePWM(&test3);
-//	ECU_Motor_GeneratePWM(&test4);
-
-	//ECU_Bluetooth_ReciveData(&bluetooth);
-
   /* USER CODE END 2 */
 
+  /* Init scheduler */
+  osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  //printf("The value is %c\n",Bluetooth_RX_Data);
-
-	  //ECU_Motor_NextStep(&moving_motor, &Bluetooth_RX_Data);
-//	  ECU_Motor_MoveRight(&steering_motor);
-//	  HAL_Delay(5000);
-//
-//	  ECU_Motor_Stop(&steering_motor);
-//	  HAL_Delay(500);
-//
-//	  ECU_Motor_MoveLeft(&steering_motor);
-//	  HAL_Delay(5000);
-
-	  ECU_Ultrasonic_Read(&ultrasonic_1);
-	  printf("ultrasonic 1 value is %lu\n",ultrasonic_Distance_Values[0]);
-	  //HAL_Delay(10);
-
-	  ECU_Ultrasonic_Read(&ultrasonic_2);
-	  printf("ultrasonic 2 value is %lu\n",ultrasonic_Distance_Values[1]);
-	  //HAL_Delay(10);
-
-	  ECU_Ultrasonic_Read(&ultrasonic_3);
-	  printf("ultrasonic 3 value is %lu\n",ultrasonic_Distance_Values[2]);
-	  //HAL_Delay(10);
-
-	  ECU_Ultrasonic_Read(&ultrasonic_4);
-	  printf("ultrasonic 4 value is %lu\n",ultrasonic_Distance_Values[3]);
-	  //HAL_Delay(10);
-
-	  ECU_Ultrasonic_Read(&ultrasonic_5);
-	  printf("ultrasonic 5 value is %lu\n",ultrasonic_Distance_Values[4]);
-	  //HAL_Delay(10);
-
-	  ECU_Ultrasonic_Read(&ultrasonic_6);
-	  printf("ultrasonic 6 value is %lu\n",ultrasonic_Distance_Values[5]);
-	  //HAL_Delay(10);
-
-	  //HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-
-	  //HAL_Delay(500);
 
 
     /* USER CODE END WHILE */

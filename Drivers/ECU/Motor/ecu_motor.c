@@ -41,6 +41,7 @@ ECU_StatusTypeDef ECU_Motor_GeneratePWM(motor_obj_t *motor_obj){
 		OCNIdleState = TIM_OCNIDLESTATE_RESET
 	*/
 
+	/* Convert Frequency (Hz) to Period (us) */
 	Period = (uint32_t)(1000000 /(motor_obj->speed.Frequency));
 
 	/* Update The Timer with the new Period */
