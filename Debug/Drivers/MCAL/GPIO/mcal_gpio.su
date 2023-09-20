@@ -1,0 +1,11 @@
+../Drivers/MCAL/GPIO/mcal_gpio.c:58:16:gpio_pin_mode_intialize	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:134:16:gpio_pin_get_direction_status	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:156:16:gpio_pin_write_logic	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:187:16:gpio_pin_read_logic	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:208:16:gpio_pin_toggle_logic	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:228:16:gpio_pin_intialize	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:250:16:gpio_port_direction_intialize	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:271:16:gpio_port_get_direction_status	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:292:16:gpio_port_write_logic	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:313:16:gpio_port_read_logic	24	static
+../Drivers/MCAL/GPIO/mcal_gpio.c:333:16:gpio_port_toggle_logic	24	static

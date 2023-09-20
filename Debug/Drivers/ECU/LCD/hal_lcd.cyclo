@@ -1,0 +1,15 @@
+../Drivers/ECU/LCD/hal_lcd.c:20:16:lcd_4bit_intialize	2
+../Drivers/ECU/LCD/hal_lcd.c:54:16:lcd_4bit_send_command	2
+../Drivers/ECU/LCD/hal_lcd.c:80:16:lcd_4bit_clear_command	2
+../Drivers/ECU/LCD/hal_lcd.c:98:16:lcd_4bit_send_char_data	2
+../Drivers/ECU/LCD/hal_lcd.c:127:16:lcd_4bit_send_char_data_pos	2
+../Drivers/ECU/LCD/hal_lcd.c:145:16:lcd_4bit_send_string	3
+../Drivers/ECU/LCD/hal_lcd.c:166:16:lcd_4bit_send_string_pos	3
+../Drivers/ECU/LCD/hal_lcd.c:186:16:lcd_4bit_send_uint32	6
+../Drivers/ECU/LCD/hal_lcd.c:218:16:lcd_4bit_send_uint32_pos	2
+../Drivers/ECU/LCD/hal_lcd.c:239:16:lcd_4bit_send_custom_char	3
+../Drivers/ECU/LCD/hal_lcd.c:262:16:convert_uint32_to_string	7
+../Drivers/ECU/LCD/hal_lcd.c:305:16:convert_string_to_uint32	4
+../Drivers/ECU/LCD/hal_lcd.c:325:23:lcd_send_4bits	1
+../Drivers/ECU/LCD/hal_lcd.c:339:23:lcd_4bit_send_enable_signal	1
+../Drivers/ECU/LCD/hal_lcd.c:355:23:lcd_4bit_set_cursor	5

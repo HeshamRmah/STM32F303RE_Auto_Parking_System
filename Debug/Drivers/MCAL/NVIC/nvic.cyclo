@@ -1,0 +1,7 @@
+../Drivers/MCAL/NVIC/nvic.c:11:6:NVIC_voidInit	1
+../Drivers/MCAL/NVIC/nvic.c:22:6:NVIC_voidEnabeInterrupt	3
+../Drivers/MCAL/NVIC/nvic.c:34:6:NVIC_voidDisableInterrupt	3
+../Drivers/MCAL/NVIC/nvic.c:46:6:NVIC_voidSetPendingFlag	3
+../Drivers/MCAL/NVIC/nvic.c:59:6:NVIC_voidClrPendingFlag	3
+../Drivers/MCAL/NVIC/nvic.c:71:7:NVIC_u8ReadActiveFlag	3
+../Drivers/MCAL/NVIC/nvic.c:85:6:NVIC_voidSetPriority	1

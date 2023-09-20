@@ -1,0 +1,4 @@
+../Drivers/MCAL/SysTick/systick.c:12:16:systick_intialize	24	static
+../Drivers/MCAL/SysTick/systick.c:49:16:systick_Start	24	static
+../Drivers/MCAL/SysTick/systick.c:61:16:systick_Stop	24	static
+../Drivers/MCAL/SysTick/systick.c:72:16:systick_SetTime	24	static

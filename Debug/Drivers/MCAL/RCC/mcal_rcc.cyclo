@@ -1,0 +1,3 @@
+../Drivers/MCAL/RCC/mcal_rcc.c:10:6:RCC_voidSysClkInit	1
+../Drivers/MCAL/RCC/mcal_rcc.c:29:6:RCC_voidPerClkEn	5
+../Drivers/MCAL/RCC/mcal_rcc.c:45:6:RCC_voidPerClkDis	5
