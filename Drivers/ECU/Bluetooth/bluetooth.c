@@ -12,14 +12,12 @@ uint8_t temp = 0;
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	//printf("----------------------> is %c\n",temp);
-	if( (temp == 'F') || (temp == 'B') || (temp == 'G') || (temp == 'I') || (temp == 'H') || (temp == 'J')
-			 || (temp == 'R') || (temp == 'L') || (temp == 'S') ){
+	printf("----------------------> is %c\n",temp);
+	if( BLUETOOTH_CONDITION(temp) ){
 		Bluetooth_RX_Data = temp;
 		//printf("ISR is %c\n",Bluetooth_RX_Data);
 	}
 	HAL_UART_Receive_IT(huart, &temp, 1);
-
 }
 
 

@@ -1,5 +1,6 @@
-../Core/Src/freertos.c:141:6:MX_FREERTOS_Init	8	static
-../Core/Src/freertos.c:192:6:DefaultTask	16	static
-../Core/Src/freertos.c:219:6:RTOS_Ultrasonics_Read	16	static
-../Core/Src/freertos.c:255:6:RTOS_Car_Next_Step	16	static
-../Core/Src/freertos.c:276:6:RTOS_Bluetooth_Recive	16	static
+../Core/Src/freertos.c:159:6:MX_FREERTOS_Init	8	static
+../Core/Src/freertos.c:222:6:DefaultTask	16	static
+../Core/Src/freertos.c:248:6:RTOS_Ultrasonics_Read	16	static
+../Core/Src/freertos.c:284:6:RTOS_Car_Next_Step	16	static
+../Core/Src/freertos.c:320:6:RTOS_Bluetooth_Recive	16	static
+../Core/Src/freertos.c:338:6:RTOS_Automatic_Parking	16	static

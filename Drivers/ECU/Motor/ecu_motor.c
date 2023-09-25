@@ -8,6 +8,12 @@
 
 #include "ecu_motor.h"
 
+motor_speed_t high_speed   = {.Frequency = 1000, .Duty_Cycle = 0.9};
+
+motor_speed_t medium_speed = {.Frequency = 1000, .Duty_Cycle = 0.65};
+
+motor_speed_t low_speed    = {.Frequency = 1000, .Duty_Cycle = 0.4};
+
 
 /**
   * @brief  Starts the PWM signal generation.
@@ -124,7 +130,10 @@ ECU_StatusTypeDef ECU_Motor_NextStep(motor_obj_t *motor_obj, uint8_t *direction)
 		case RIGHT:         ECU_Motor_MoveRight       (motor_obj); break;
 		case LEFT:          ECU_Motor_MoveLeft        (motor_obj); break;
 		case STOP:          ECU_Motor_Stop            (motor_obj); break;
-		default :           ECU_Motor_Stop            (motor_obj); break;
+		case HIGH_SPEED:    ECU_Motor_ChangeSpeed     (motor_obj, &high_speed);
+		case MEDIUM_SPEED:  ECU_Motor_ChangeSpeed     (motor_obj, &medium_speed);
+		case LOW_SPEED:     ECU_Motor_ChangeSpeed     (motor_obj, &low_speed);
+		default:            ECU_Motor_Stop            (motor_obj); break;
 	}
 
 	return ECU_OK;
@@ -343,6 +352,8 @@ ECU_StatusTypeDef ECU_Motor_MoveRight(motor_obj_t *motor_obj){
 	HAL_GPIO_WritePin(STEERING_MOTOR_PORT, STEERING_MOTOR_POSITIVE_PIN, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(STEERING_MOTOR_PORT, STEERING_MOTOR_NEGITVE_PIN, GPIO_PIN_RESET);
 
+	HAL_GPIO_WritePin(MOVING_MOTOR_PORT, MOVING_MOTOR_POSITIVE_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(MOVING_MOTOR_PORT, MOVING_MOTOR_NEGITVE_PIN, GPIO_PIN_RESET);
 
 	return ECU_OK;
 }
@@ -369,6 +380,8 @@ ECU_StatusTypeDef ECU_Motor_MoveLeft(motor_obj_t *motor_obj){
 	HAL_GPIO_WritePin(STEERING_MOTOR_PORT, STEERING_MOTOR_POSITIVE_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEERING_MOTOR_PORT, STEERING_MOTOR_NEGITVE_PIN, GPIO_PIN_SET);
 
+	HAL_GPIO_WritePin(MOVING_MOTOR_PORT, MOVING_MOTOR_POSITIVE_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(MOVING_MOTOR_PORT, MOVING_MOTOR_NEGITVE_PIN, GPIO_PIN_RESET);
 
 	return ECU_OK;
 }

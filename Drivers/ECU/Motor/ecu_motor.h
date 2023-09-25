@@ -14,26 +14,33 @@
 
 /* ----------------- Macro Declarations -----------------*/
 #define STEERING_MOTOR_PORT                 GPIOC
-#define STEERING_MOTOR_POSITIVE_PIN         GPIO_PIN_9
-#define STEERING_MOTOR_NEGITVE_PIN          GPIO_PIN_8
+#define STEERING_MOTOR_POSITIVE_PIN         GPIO_PIN_8
+#define STEERING_MOTOR_NEGITVE_PIN          GPIO_PIN_9
 
 #define STEERING_MOTOR_EN_PORT              GPIOA
 #define STEERING_MOTOR_EN_PIN               GPIO_PIN_8
 
 #define MOVING_MOTOR_PORT                   GPIOA
-#define MOVING_MOTOR_POSITIVE_PIN           GPIO_PIN_10
-#define MOVING_MOTOR_NEGITVE_PIN            GPIO_PIN_9
+#define MOVING_MOTOR_POSITIVE_PIN           GPIO_PIN_9
+#define MOVING_MOTOR_NEGITVE_PIN            GPIO_PIN_10
 
 
-#define FORWARD        'F'
-#define REVERSE        'B'
-#define FORWARD_LEFT   'G'
-#define FORWARD_RIGHT  'I'
-#define REVERSE_LEFT   'H'
-#define REVERSE_RIGHT  'J'
-#define LEFT           'L'
-#define RIGHT          'R'
-#define STOP           'S'
+#define FORWARD         'F'
+#define REVERSE         'B'
+#define FORWARD_LEFT    'G'
+#define FORWARD_RIGHT   'I'
+#define REVERSE_LEFT    'H'
+#define REVERSE_RIGHT   'J'
+#define LEFT            'L'
+#define RIGHT           'R'
+#define STOP            'S'
+#define HIGH_SPEED      '#'
+#define MEDIUM_SPEED    '@'
+#define LOW_SPEED       '!'
+#define AUTO_PARK_RIGHT 'W'
+#define AUTO_PARK_LEFT  'U'
+#define AUTO_PARK_OFF   'w'
+
 
 /* ----------------- Macro Functions Declarations -----------------*/
 
@@ -48,6 +55,12 @@ typedef struct{
 	uint32_t PWM_Channel;             // PWM Channel        @ref TIM_Channel TIM Channel
 	motor_speed_t speed;              // Speed of the motor @ref motor_speed_t
 }motor_obj_t;
+
+extern motor_speed_t high_speed;
+
+extern motor_speed_t medium_speed;
+
+extern motor_speed_t low_speed;
 
 /* ----------------- Software Interfaces Declarations -----------------*/
 

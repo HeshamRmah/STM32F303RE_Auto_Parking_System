@@ -10,6 +10,7 @@
 
 /* ----------------- Includes -----------------*/
 #include "../../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h"
+#include "../Motor/ecu_motor.h"
 #include "../ECU_std_types.h"
 
 /* ----------------- Macro Declarations -----------------*/
@@ -20,6 +21,10 @@
 #define LEFT_REAR_ULTRASONIC_INDEX     4
 #define REAR_ULTRASONIC_INDEX          5
 
+#define BLUETOOTH_CONDITION(x) (x == FORWARD)||(x == REVERSE)||(x == FORWARD_LEFT)||(x == FORWARD_RIGHT) \
+								||(x == REVERSE_LEFT)||(x == REVERSE_RIGHT)||(x == RIGHT)||(x == LEFT)  \
+								||(x == STOP)||(x == HIGH_SPEED)||(x == MEDIUM_SPEED)||(x == LOW_SPEED) \
+								||(x == AUTO_PARK_RIGHT)||(x == AUTO_PARK_LEFT)||(x == AUTO_PARK_OFF)
 /* ----------------- Macro Functions Declarations -----------------*/
 
 

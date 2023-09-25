@@ -31,6 +31,8 @@ Drivers/ECU/Bluetooth/bluetooth.o: ../Drivers/ECU/Bluetooth/bluetooth.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h \
+ ../Drivers/ECU/Bluetooth/../Motor/ecu_motor.h \
+ ../Drivers/ECU/Bluetooth/../Motor/../ECU_std_types.h \
  ../Drivers/ECU/Bluetooth/../ECU_std_types.h
 ../Drivers/ECU/Bluetooth/bluetooth.h:
 ../Core/Inc/../../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
@@ -64,4 +66,6 @@ Drivers/ECU/Bluetooth/bluetooth.o: ../Drivers/ECU/Bluetooth/bluetooth.c \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h:
+../Drivers/ECU/Bluetooth/../Motor/ecu_motor.h:
+../Drivers/ECU/Bluetooth/../Motor/../ECU_std_types.h:
 ../Drivers/ECU/Bluetooth/../ECU_std_types.h:
