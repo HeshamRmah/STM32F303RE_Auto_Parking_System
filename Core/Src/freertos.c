@@ -77,7 +77,7 @@ ultrasonic_obj_t Rear_ultrasonic       = {.htim = &htim15,.PWM_Channel = TIM_CHA
 
 /*motor_obj_t steering_motor = {.htim = &htim, .PWM_Channel = TIM_CHANNEL_1, .speed.Frequency = 1000, .speed.Duty_Cycle = 0.4};*/
 
-motor_obj_t moving_motor = {.htim = &htim16, .PWM_Channel = TIM_CHANNEL_1, .speed.Frequency = 1000, .speed.Duty_Cycle = 0.65};
+motor_obj_t moving_motor = {.htim = &htim16, .PWM_Channel = TIM_CHANNEL_1, .speed.Frequency = 25000, .speed.Duty_Cycle = 0.9};
 
 bluetooth_obj_t bluetooth = {.huart = &huart4, .Numberofdata = 1};
 
@@ -99,28 +99,21 @@ osThreadId_t ultrasonics_readHandle;
 const osThreadAttr_t ultrasonics_read_attributes = {
   .name = "ultrasonics_read",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh,
+  .priority = (osPriority_t) osPriorityHigh7,
 };
 /* Definitions for car_next_step */
 osThreadId_t car_next_stepHandle;
 const osThreadAttr_t car_next_step_attributes = {
   .name = "car_next_step",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for bluetooth_recive */
-osThreadId_t bluetooth_reciveHandle;
-const osThreadAttr_t bluetooth_recive_attributes = {
-  .name = "bluetooth_recive",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityAboveNormal1,
+  .priority = (osPriority_t) osPriorityHigh5,
 };
 /* Definitions for Automatic_Parking */
 osThreadId_t Automatic_ParkingHandle;
 const osThreadAttr_t Automatic_Parking_attributes = {
   .name = "Automatic_Parking",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh4,
+  .priority = (osPriority_t) osPriorityHigh6,
 };
 /* Definitions for Car_Conrol_Mode */
 osMutexId_t Car_Conrol_ModeHandle;
@@ -146,7 +139,6 @@ const osEventFlagsAttr_t Parking_side_attributes = {
 void DefaultTask(void *argument);
 void RTOS_Ultrasonics_Read(void *argument);
 void RTOS_Car_Next_Step(void *argument);
-void RTOS_Bluetooth_Recive(void *argument);
 void RTOS_Automatic_Parking(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -190,9 +182,6 @@ void MX_FREERTOS_Init(void) {
   /* creation of car_next_step */
   car_next_stepHandle = osThreadNew(RTOS_Car_Next_Step, NULL, &car_next_step_attributes);
 
-  /* creation of bluetooth_recive */
-  bluetooth_reciveHandle = osThreadNew(RTOS_Bluetooth_Recive, NULL, &bluetooth_recive_attributes);
-
   /* creation of Automatic_Parking */
   Automatic_ParkingHandle = osThreadNew(RTOS_Automatic_Parking, NULL, &Automatic_Parking_attributes);
 
@@ -225,6 +214,8 @@ void DefaultTask(void *argument)
 	ECU_Bluetooth_ReciveData(&bluetooth);
 
 	ECU_Motor_GeneratePWM(&moving_motor);
+
+	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 	//ECU_Motor_GeneratePWM(&steering_motor);
 
   /* Infinite loop */
@@ -252,13 +243,13 @@ void RTOS_Ultrasonics_Read(void *argument)
   for(;;)
   {
 	  ECU_Ultrasonic_Read(&Front_ultrasonic);
-	  //printf("Front_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX]);
+	  printf("Front_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX]);
 
 	  ECU_Ultrasonic_Read(&RightFront_ultrasonic);
-	  //printf("RightFront_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX]);
+	  printf("RightFront_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX]);
 
 	  ECU_Ultrasonic_Read(&RightRear_ultrasonic);
-	  //printf("RightRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX]);
+	  printf("RightRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX]);
 
 	  ECU_Ultrasonic_Read(&LeftFront_ultrasonic);
 	  //printf("LeftFront_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX]);
@@ -267,7 +258,7 @@ void RTOS_Ultrasonics_Read(void *argument)
 	  //printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
 
 	  ECU_Ultrasonic_Read(&Rear_ultrasonic);
-	  //printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
+	  printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
 
     osDelay(90);
   }
@@ -310,24 +301,6 @@ void RTOS_Car_Next_Step(void *argument)
   /* USER CODE END RTOS_Car_Next_Step */
 }
 
-/* USER CODE BEGIN Header_RTOS_Bluetooth_Recive */
-/**
-* @brief Function implementing the bluetooth_recive thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_RTOS_Bluetooth_Recive */
-void RTOS_Bluetooth_Recive(void *argument)
-{
-  /* USER CODE BEGIN RTOS_Bluetooth_Recive */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(100000);
-  }
-  /* USER CODE END RTOS_Bluetooth_Recive */
-}
-
 /* USER CODE BEGIN Header_RTOS_Automatic_Parking */
 /**
 * @brief Function implementing the Automatic_Parking thread.
@@ -348,25 +321,37 @@ void RTOS_Automatic_Parking(void *argument)
 	  else{/* DO NOTHING */}
 
 	  if( (osEventFlagsGet(Car_modeHandle) & CAR_CONTROL_BIT) == STD_ACTIVE){
-		  printf("------------------------------------------------Automatic Parking Mode\n");
+		  printf("-------------------------- Automatic Parking Mode ----------------------\n");
 		  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
 		  /* Select Right Side to Park */
 		  if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) == (STD_IDLE << PARKING_SIDE_BIT)){
 			  printf("Park Right Side\n");
+			  ECU_Motor_MoveForward(&moving_motor);
 			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] < 16) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] < 16)){
-				  ECU_Motor_MoveForward(&moving_motor);
-			  }
-			  /* Delay to let the car move Forward to half the car length */
-			  HAL_Delay(250);
-			  ECU_Motor_Stop(&moving_motor);
-			  while(ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 6){
-				  ECU_Motor_MoveReverseRight(&moving_motor);
-			  }
-			  ECU_Motor_Stop(&moving_motor);
-			  while(ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 4){
-				  ECU_Motor_MoveReverseLeft(&moving_motor);
-			  }
 
+				  printf("Searching for Empty Slot\n");
+			  }
+			  printf("Found the Empty Slot\n");
+			  /* Delay to let the car move Forward to half the car length */
+			  HAL_Delay(500);
+			  ECU_Motor_Stop(&moving_motor);
+			  HAL_Delay(500);
+			  ECU_Motor_MoveReverseRight(&moving_motor);
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 12) && (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 7)){
+				  printf("try to Park 1 Reverse Right\n");
+			  }
+			  //ECU_Motor_Stop(&moving_motor);
+			  //HAL_Delay(50);
+			  //ECU_Motor_MoveReverse(&moving_motor);
+			  //HAL_Delay(150);
+			  ECU_Motor_Stop(&moving_motor);
+			  HAL_Delay(50);
+			  while(1){};
+			  ECU_Motor_MoveReverseLeft(&moving_motor);
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 4) && (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 6)){
+				  printf("try to Park 2 Reverse Left\n");
+			  }
+			  printf("Finally ... the car should be parked successfully by now\n");
 			  osEventFlagsClear(Car_modeHandle, CAR_CONTROL_BIT);
 
 

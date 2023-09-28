@@ -17,8 +17,8 @@
 #define STEERING_MOTOR_POSITIVE_PIN         GPIO_PIN_8
 #define STEERING_MOTOR_NEGITVE_PIN          GPIO_PIN_9
 
-#define STEERING_MOTOR_EN_PORT              GPIOA
-#define STEERING_MOTOR_EN_PIN               GPIO_PIN_8
+//#define STEERING_MOTOR_EN_PORT              GPIOA
+//#define STEERING_MOTOR_EN_PIN               GPIO_PIN_8
 
 #define MOVING_MOTOR_PORT                   GPIOA
 #define MOVING_MOTOR_POSITIVE_PIN           GPIO_PIN_9
@@ -34,12 +34,12 @@
 #define LEFT            'L'
 #define RIGHT           'R'
 #define STOP            'S'
-#define HIGH_SPEED      '#'
-#define MEDIUM_SPEED    '@'
-#define LOW_SPEED       '!'
 #define AUTO_PARK_RIGHT 'W'
 #define AUTO_PARK_LEFT  'U'
 #define AUTO_PARK_OFF   'w'
+#define HIGH_SPEED      '#'
+#define MEDIUM_SPEED    '@'
+#define LOW_SPEED       '!'
 
 
 /* ----------------- Macro Functions Declarations -----------------*/
