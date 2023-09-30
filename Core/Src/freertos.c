@@ -353,7 +353,7 @@ void RTOS_Automatic_Parking(void *argument)
 				  printf("try to Park 1 Reverse Right\n");
 			  }
 
-			  ECU_Motor_MoveReverse(&moving_motor);
+			  ECU_Motor_MoveForward(&moving_motor);
 			  HAL_Delay(5);
 			  ECU_Motor_Stop(&moving_motor);
 			  //while(1){};
@@ -363,7 +363,7 @@ void RTOS_Automatic_Parking(void *argument)
 			  {
 				  //printf("try to Park 2 Reverse Left\n");
 			  }
-			  ECU_Motor_MoveReverse(&moving_motor);
+			  ECU_Motor_MoveForward(&moving_motor);
 			  HAL_Delay(5);
 			  ECU_Motor_ChangeSpeed(&moving_motor, &medium_speed);
 			  ECU_Motor_Stop(&moving_motor);
