@@ -108,7 +108,7 @@ LoopForever:
 /**
  * @brief  This is the code that gets called when the processor receives an
  *         unexpected interrupt.  This simply enters an infinite loop, preserving
- *         the system state for examination by a debugger.
+. *         the system state for examination by a debugger.
  *
  * @param  None
  * @retval : None
