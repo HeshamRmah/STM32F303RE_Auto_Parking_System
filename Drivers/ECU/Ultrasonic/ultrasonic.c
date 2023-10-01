@@ -34,11 +34,11 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 		//printf("---------------> ultrasonic index is %d\n",sensor_index);
 		if(Is_first_Capture[sensor_index] == 0){
 
-			/* Capture the Time of the Rising Edge */
-			IC_first_Capture(htim, &IC_Val1[sensor_index], &Is_first_Capture[sensor_index]);
-
 			/* Stop the generation of PWM Trigger Pulse */
 			HAL_TIM_PWM_Stop(htim, TIM_CHANNEL_1);
+
+			/* Capture the Time of the Rising Edge */
+			IC_first_Capture(htim, &IC_Val1[sensor_index], &Is_first_Capture[sensor_index]);
 
 		}
 		else if (Is_first_Capture[sensor_index] == 1){

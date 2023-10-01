@@ -96,21 +96,21 @@ osThreadId_t ultrasonics_readHandle;
 const osThreadAttr_t ultrasonics_read_attributes = {
   .name = "ultrasonics_read",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh7,
+  .priority = (osPriority_t) osPriorityRealtime6,
 };
 /* Definitions for car_next_step */
 osThreadId_t car_next_stepHandle;
 const osThreadAttr_t car_next_step_attributes = {
   .name = "car_next_step",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh5,
+  .priority = (osPriority_t) osPriorityRealtime4,
 };
 /* Definitions for Automatic_Parking */
 osThreadId_t Automatic_ParkingHandle;
 const osThreadAttr_t Automatic_Parking_attributes = {
   .name = "Automatic_Parking",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh6,
+  .priority = (osPriority_t) osPriorityRealtime5,
 };
 /* Definitions for Car_Conrol_Mode */
 osMutexId_t Car_Conrol_ModeHandle;
@@ -219,6 +219,7 @@ void DefaultTask(void *argument)
   for(;;)
   {
 	  printf("DefaultTask is Running\n");
+	  osThreadSuspend(Automatic_ParkingHandle);
 	  /* Suspend itself */
 	  osThreadSuspend(osThreadGetId());
     osDelay(1000);
@@ -240,25 +241,30 @@ void RTOS_Ultrasonics_Read(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  ECU_Ultrasonic_Read(&Front_ultrasonic);
+
+	  if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) == (STD_IDLE << PARKING_SIDE_BIT))
+	  {
+		  ECU_Ultrasonic_Read(&RightRear_ultrasonic);
+		  ECU_Ultrasonic_Read(&Front_ultrasonic);
+		  ECU_Ultrasonic_Read(&Rear_ultrasonic);
+		  ECU_Ultrasonic_Read(&RightFront_ultrasonic);
+	  }
+	  else if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) || (STD_ACTIVE << PARKING_SIDE_BIT))
+	  {
+		  ECU_Ultrasonic_Read(&LeftRear_ultrasonic);
+		  ECU_Ultrasonic_Read(&Front_ultrasonic);
+		  ECU_Ultrasonic_Read(&Rear_ultrasonic);
+		  ECU_Ultrasonic_Read(&LeftFront_ultrasonic);
+	  }
+
 	  printf("Front_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX]);
-
-	  ECU_Ultrasonic_Read(&RightFront_ultrasonic);
 	  printf("RightFront_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX]);
-
-	  ECU_Ultrasonic_Read(&RightRear_ultrasonic);
 	  printf("RightRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX]);
-
-	  ECU_Ultrasonic_Read(&LeftFront_ultrasonic);
-	  //printf("LeftFront_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX]);
-
-	  ECU_Ultrasonic_Read(&LeftRear_ultrasonic);
+	  //printf("RightRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX]);
 	  //printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
-
-	  ECU_Ultrasonic_Read(&Rear_ultrasonic);
 	  printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
 
-    osDelay(50);
+    osDelay(90);
   }
   /* USER CODE END RTOS_Ultrasonics_Read */
 }
@@ -281,10 +287,14 @@ void RTOS_Car_Next_Step(void *argument)
 		  //osMutexAcquire(Car_Conrol_ModeHandle, 10U);
 		  osEventFlagsSet(Car_modeHandle, CAR_CONTROL_BIT);
 		  osEventFlagsClear(Car_modeHandle, PARKING_SIDE_BIT);
+		  osThreadResume(Automatic_ParkingHandle);
+		  osThreadSuspend(car_next_stepHandle);
 	  }
 	  else if( (Bluetooth_RX_Data == AUTO_PARK_LEFT) ){
 		  osEventFlagsSet(Car_modeHandle, CAR_CONTROL_BIT);
 		  osEventFlagsSet(Car_modeHandle, PARKING_SIDE_BIT);
+		  osThreadResume(Automatic_ParkingHandle);
+		  osThreadSuspend(car_next_stepHandle);
 	  }
 	  else{/* DO NOTHING */}
 
@@ -294,7 +304,7 @@ void RTOS_Car_Next_Step(void *argument)
 	  }
 	  else{/* DO NOTHING */}
 
-	  osDelay(250);
+	  osDelay(150);
   }
   /* USER CODE END RTOS_Car_Next_Step */
 }
@@ -348,7 +358,7 @@ void RTOS_Automatic_Parking(void *argument)
 			  //HAL_Delay(100);
 			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
 			  ECU_Motor_MoveReverseRight(&moving_motor);
-			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 15))
+			  while((ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 25))
 			  {
 				  printf("try to Park 1 Reverse Right\n");
 			  }
@@ -440,10 +450,11 @@ void RTOS_Automatic_Parking(void *argument)
 		  }
 		  else{/* DO NOTHING */}
 
-
+		  osThreadResume(car_next_stepHandle);
+		  osThreadSuspend(Automatic_ParkingHandle);
 	  }
 	  else{/* DO NOTHING */}
-    osDelay(100);
+    osDelay(120000);
   }
   /* USER CODE END RTOS_Automatic_Parking */
 }
