@@ -41,9 +41,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_macro  000254ae  00000000  00000000  00047000  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   0002017f  00000000  00000000  0006c4ae  2**0
+ 19 .debug_line   00020182  00000000  00000000  0006c4ae  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000d7790  00000000  00000000  0008c62d  2**0
+ 20 .debug_str    000d7790  00000000  00000000  0008c630  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  21 .debug_frame  00006820  00000000  00000000  00163dc0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -572,7 +572,7 @@ void RTOS_Automatic_Parking(void *argument)
  8000546:	4603      	mov	r3, r0
  8000548:	f003 0302 	and.w	r3, r3, #2
  800054c:	2b00      	cmp	r3, #0
- 800054e:	f040 8095 	bne.w	800067c <RTOS_Automatic_Parking+0x188>
+ 800054e:	f040 8099 	bne.w	8000684 <RTOS_Automatic_Parking+0x190>
 		  {
 			  printf("Park Right Side\n");
  8000552:	488c      	ldr	r0, [pc, #560]	; (8000784 <RTOS_Automatic_Parking+0x290>)
@@ -588,23 +588,23 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_MoveForward(&moving_motor);
  8000564:	4886      	ldr	r0, [pc, #536]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
  8000566:	f001 fef1 	bl	800234c <ECU_Motor_MoveForward>
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 12)))
+			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 15)))
  800056a:	e002      	b.n	8000572 <RTOS_Automatic_Parking+0x7e>
 			  {
 				  printf("Searching for Empty Slot\n");
  800056c:	4887      	ldr	r0, [pc, #540]	; (800078c <RTOS_Automatic_Parking+0x298>)
  800056e:	f00b f925 	bl	800b7bc <puts>
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 12)))
+			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 15)))
  8000572:	4b85      	ldr	r3, [pc, #532]	; (8000788 <RTOS_Automatic_Parking+0x294>)
  8000574:	685b      	ldr	r3, [r3, #4]
  8000576:	7bfa      	ldrb	r2, [r7, #15]
- 8000578:	320c      	adds	r2, #12
+ 8000578:	320f      	adds	r2, #15
  800057a:	4293      	cmp	r3, r2
  800057c:	d3f6      	bcc.n	800056c <RTOS_Automatic_Parking+0x78>
  800057e:	4b82      	ldr	r3, [pc, #520]	; (8000788 <RTOS_Automatic_Parking+0x294>)
  8000580:	689b      	ldr	r3, [r3, #8]
  8000582:	7bba      	ldrb	r2, [r7, #14]
- 8000584:	320c      	adds	r2, #12
+ 8000584:	320f      	adds	r2, #15
  8000586:	4293      	cmp	r3, r2
  8000588:	d3f0      	bcc.n	800056c <RTOS_Automatic_Parking+0x78>
 			  }
@@ -613,23 +613,23 @@ void RTOS_Automatic_Parking(void *argument)
  800058c:	f00b f916 	bl	800b7bc <puts>
 
 			  /* Delay to let the car move Forward to half the car length */
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 12)))
+			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 15)))
  8000590:	e002      	b.n	8000598 <RTOS_Automatic_Parking+0xa4>
 			  {
 				  printf("Center the car after Founding the Empty Slot\n");
  8000592:	4880      	ldr	r0, [pc, #512]	; (8000794 <RTOS_Automatic_Parking+0x2a0>)
  8000594:	f00b f912 	bl	800b7bc <puts>
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 12)))
+			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 15)))
  8000598:	4b7b      	ldr	r3, [pc, #492]	; (8000788 <RTOS_Automatic_Parking+0x294>)
  800059a:	685b      	ldr	r3, [r3, #4]
  800059c:	7bfa      	ldrb	r2, [r7, #15]
- 800059e:	320c      	adds	r2, #12
+ 800059e:	320f      	adds	r2, #15
  80005a0:	4293      	cmp	r3, r2
  80005a2:	d8f6      	bhi.n	8000592 <RTOS_Automatic_Parking+0x9e>
  80005a4:	4b78      	ldr	r3, [pc, #480]	; (8000788 <RTOS_Automatic_Parking+0x294>)
  80005a6:	689b      	ldr	r3, [r3, #8]
  80005a8:	7bba      	ldrb	r2, [r7, #14]
- 80005aa:	320c      	adds	r2, #12
+ 80005aa:	320f      	adds	r2, #15
  80005ac:	4293      	cmp	r3, r2
  80005ae:	d8f0      	bhi.n	8000592 <RTOS_Automatic_Parking+0x9e>
 			  }
@@ -650,16 +650,16 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_MoveReverseRight(&moving_motor);
  80005ca:	486d      	ldr	r0, [pc, #436]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
  80005cc:	f001 ff82 	bl	80024d4 <ECU_Motor_MoveReverseRight>
-			  while((ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 25))
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 35))
  80005d0:	e002      	b.n	80005d8 <RTOS_Automatic_Parking+0xe4>
 			  {
 				  printf("try to Park 1 Reverse Right\n");
  80005d2:	4872      	ldr	r0, [pc, #456]	; (800079c <RTOS_Automatic_Parking+0x2a8>)
  80005d4:	f00b f8f2 	bl	800b7bc <puts>
-			  while((ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 25))
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 35))
  80005d8:	4b6b      	ldr	r3, [pc, #428]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 80005da:	689b      	ldr	r3, [r3, #8]
- 80005dc:	2b19      	cmp	r3, #25
+ 80005da:	695b      	ldr	r3, [r3, #20]
+ 80005dc:	2b23      	cmp	r3, #35	; 0x23
  80005de:	d8f8      	bhi.n	80005d2 <RTOS_Automatic_Parking+0xde>
 			  }
 
@@ -709,180 +709,180 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_MoveForwardRight(&moving_motor);
  800062a:	4855      	ldr	r0, [pc, #340]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
  800062c:	f001 feee 	bl	800240c <ECU_Motor_MoveForwardRight>
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > 4) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 4))
+			  while((ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX] > 5) && (ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > 4) && (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 4))
  8000630:	e002      	b.n	8000638 <RTOS_Automatic_Parking+0x144>
 			  {
 				  printf("try to Park 3 Forward Right\n");
  8000632:	485c      	ldr	r0, [pc, #368]	; (80007a4 <RTOS_Automatic_Parking+0x2b0>)
  8000634:	f00b f8c2 	bl	800b7bc <puts>
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > 4) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 4))
+			  while((ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX] > 5) && (ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > 4) && (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 4))
  8000638:	4b53      	ldr	r3, [pc, #332]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 800063a:	685b      	ldr	r3, [r3, #4]
- 800063c:	2b04      	cmp	r3, #4
- 800063e:	d8f8      	bhi.n	8000632 <RTOS_Automatic_Parking+0x13e>
+ 800063a:	681b      	ldr	r3, [r3, #0]
+ 800063c:	2b05      	cmp	r3, #5
+ 800063e:	d907      	bls.n	8000650 <RTOS_Automatic_Parking+0x15c>
  8000640:	4b51      	ldr	r3, [pc, #324]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 8000642:	689b      	ldr	r3, [r3, #8]
+ 8000642:	685b      	ldr	r3, [r3, #4]
  8000644:	2b04      	cmp	r3, #4
- 8000646:	d8f4      	bhi.n	8000632 <RTOS_Automatic_Parking+0x13e>
+ 8000646:	d903      	bls.n	8000650 <RTOS_Automatic_Parking+0x15c>
+ 8000648:	4b4f      	ldr	r3, [pc, #316]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 800064a:	689b      	ldr	r3, [r3, #8]
+ 800064c:	2b04      	cmp	r3, #4
+ 800064e:	d8f0      	bhi.n	8000632 <RTOS_Automatic_Parking+0x13e>
 			  }
 			  ECU_Motor_MoveReverse(&moving_motor);
- 8000648:	484d      	ldr	r0, [pc, #308]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 800064a:	f001 feaf 	bl	80023ac <ECU_Motor_MoveReverse>
+ 8000650:	484b      	ldr	r0, [pc, #300]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000652:	f001 feab 	bl	80023ac <ECU_Motor_MoveReverse>
 			  HAL_Delay(5);
- 800064e:	2005      	movs	r0, #5
- 8000650:	f002 f9fe 	bl	8002a50 <HAL_Delay>
+ 8000656:	2005      	movs	r0, #5
+ 8000658:	f002 f9fa 	bl	8002a50 <HAL_Delay>
 			  ECU_Motor_Stop(&moving_motor);
- 8000654:	484a      	ldr	r0, [pc, #296]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 8000656:	f001 ffa1 	bl	800259c <ECU_Motor_Stop>
+ 800065c:	4848      	ldr	r0, [pc, #288]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 800065e:	f001 ff9d 	bl	800259c <ECU_Motor_Stop>
 
 			  printf("Finally ... the car should be parked successfully by now\n");
- 800065a:	4853      	ldr	r0, [pc, #332]	; (80007a8 <RTOS_Automatic_Parking+0x2b4>)
- 800065c:	f00b f8ae 	bl	800b7bc <puts>
+ 8000662:	4851      	ldr	r0, [pc, #324]	; (80007a8 <RTOS_Automatic_Parking+0x2b4>)
+ 8000664:	f00b f8aa 	bl	800b7bc <puts>
 			  osEventFlagsClear(Car_modeHandle, CAR_CONTROL_BIT);
- 8000660:	4b44      	ldr	r3, [pc, #272]	; (8000774 <RTOS_Automatic_Parking+0x280>)
- 8000662:	681b      	ldr	r3, [r3, #0]
- 8000664:	2101      	movs	r1, #1
- 8000666:	4618      	mov	r0, r3
- 8000668:	f007 fe8e 	bl	8008388 <osEventFlagsClear>
+ 8000668:	4b42      	ldr	r3, [pc, #264]	; (8000774 <RTOS_Automatic_Parking+0x280>)
+ 800066a:	681b      	ldr	r3, [r3, #0]
+ 800066c:	2101      	movs	r1, #1
+ 800066e:	4618      	mov	r0, r3
+ 8000670:	f007 fe8a 	bl	8008388 <osEventFlagsClear>
 			  ECU_Motor_ChangeSpeed(&moving_motor, &high_speed);
- 800066c:	494f      	ldr	r1, [pc, #316]	; (80007ac <RTOS_Automatic_Parking+0x2b8>)
- 800066e:	4844      	ldr	r0, [pc, #272]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 8000670:	f001 fd90 	bl	8002194 <ECU_Motor_ChangeSpeed>
+ 8000674:	494d      	ldr	r1, [pc, #308]	; (80007ac <RTOS_Automatic_Parking+0x2b8>)
+ 8000676:	4842      	ldr	r0, [pc, #264]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000678:	f001 fd8c 	bl	8002194 <ECU_Motor_ChangeSpeed>
 			  Bluetooth_RX_Data = 'S';
- 8000674:	4b3e      	ldr	r3, [pc, #248]	; (8000770 <RTOS_Automatic_Parking+0x27c>)
- 8000676:	2253      	movs	r2, #83	; 0x53
- 8000678:	701a      	strb	r2, [r3, #0]
- 800067a:	e0c3      	b.n	8000804 <RTOS_Automatic_Parking+0x310>
+ 800067c:	4b3c      	ldr	r3, [pc, #240]	; (8000770 <RTOS_Automatic_Parking+0x27c>)
+ 800067e:	2253      	movs	r2, #83	; 0x53
+ 8000680:	701a      	strb	r2, [r3, #0]
+ 8000682:	e0bf      	b.n	8000804 <RTOS_Automatic_Parking+0x310>
 
 		  }
 		  /* Select Left Side to Park */
 		  else if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) || (STD_ACTIVE << PARKING_SIDE_BIT)){
- 800067c:	4b3d      	ldr	r3, [pc, #244]	; (8000774 <RTOS_Automatic_Parking+0x280>)
- 800067e:	681b      	ldr	r3, [r3, #0]
- 8000680:	4618      	mov	r0, r3
- 8000682:	f007 fec5 	bl	8008410 <osEventFlagsGet>
+ 8000684:	4b3b      	ldr	r3, [pc, #236]	; (8000774 <RTOS_Automatic_Parking+0x280>)
+ 8000686:	681b      	ldr	r3, [r3, #0]
+ 8000688:	4618      	mov	r0, r3
+ 800068a:	f007 fec1 	bl	8008410 <osEventFlagsGet>
 			  printf("Park Left Side\n");
- 8000686:	484a      	ldr	r0, [pc, #296]	; (80007b0 <RTOS_Automatic_Parking+0x2bc>)
- 8000688:	f00b f898 	bl	800b7bc <puts>
+ 800068e:	4848      	ldr	r0, [pc, #288]	; (80007b0 <RTOS_Automatic_Parking+0x2bc>)
+ 8000690:	f00b f894 	bl	800b7bc <puts>
 			  front_ultrasonic = ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX];
- 800068c:	4b3e      	ldr	r3, [pc, #248]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 800068e:	68db      	ldr	r3, [r3, #12]
- 8000690:	73fb      	strb	r3, [r7, #15]
+ 8000694:	4b3c      	ldr	r3, [pc, #240]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 8000696:	68db      	ldr	r3, [r3, #12]
+ 8000698:	73fb      	strb	r3, [r7, #15]
 			  rear_ultrasonic = ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX];
- 8000692:	4b3d      	ldr	r3, [pc, #244]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 8000694:	691b      	ldr	r3, [r3, #16]
- 8000696:	73bb      	strb	r3, [r7, #14]
+ 800069a:	4b3b      	ldr	r3, [pc, #236]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 800069c:	691b      	ldr	r3, [r3, #16]
+ 800069e:	73bb      	strb	r3, [r7, #14]
 			  ECU_Motor_MoveForward(&moving_motor);
- 8000698:	4839      	ldr	r0, [pc, #228]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 800069a:	f001 fe57 	bl	800234c <ECU_Motor_MoveForward>
+ 80006a0:	4837      	ldr	r0, [pc, #220]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 80006a2:	f001 fe53 	bl	800234c <ECU_Motor_MoveForward>
 			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 12)))
- 800069e:	e002      	b.n	80006a6 <RTOS_Automatic_Parking+0x1b2>
+ 80006a6:	e002      	b.n	80006ae <RTOS_Automatic_Parking+0x1ba>
 			  {
 				  printf("Searching for Empty Slot\n");
- 80006a0:	483a      	ldr	r0, [pc, #232]	; (800078c <RTOS_Automatic_Parking+0x298>)
- 80006a2:	f00b f88b 	bl	800b7bc <puts>
+ 80006a8:	4838      	ldr	r0, [pc, #224]	; (800078c <RTOS_Automatic_Parking+0x298>)
+ 80006aa:	f00b f887 	bl	800b7bc <puts>
 			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 12)))
- 80006a6:	4b38      	ldr	r3, [pc, #224]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 80006a8:	68db      	ldr	r3, [r3, #12]
- 80006aa:	7bfa      	ldrb	r2, [r7, #15]
- 80006ac:	320c      	adds	r2, #12
- 80006ae:	4293      	cmp	r3, r2
- 80006b0:	d3f6      	bcc.n	80006a0 <RTOS_Automatic_Parking+0x1ac>
- 80006b2:	4b35      	ldr	r3, [pc, #212]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 80006b4:	691b      	ldr	r3, [r3, #16]
- 80006b6:	7bba      	ldrb	r2, [r7, #14]
- 80006b8:	320c      	adds	r2, #12
- 80006ba:	4293      	cmp	r3, r2
- 80006bc:	d3f0      	bcc.n	80006a0 <RTOS_Automatic_Parking+0x1ac>
+ 80006ae:	4b36      	ldr	r3, [pc, #216]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 80006b0:	68db      	ldr	r3, [r3, #12]
+ 80006b2:	7bfa      	ldrb	r2, [r7, #15]
+ 80006b4:	320c      	adds	r2, #12
+ 80006b6:	4293      	cmp	r3, r2
+ 80006b8:	d3f6      	bcc.n	80006a8 <RTOS_Automatic_Parking+0x1b4>
+ 80006ba:	4b33      	ldr	r3, [pc, #204]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 80006bc:	691b      	ldr	r3, [r3, #16]
+ 80006be:	7bba      	ldrb	r2, [r7, #14]
+ 80006c0:	320c      	adds	r2, #12
+ 80006c2:	4293      	cmp	r3, r2
+ 80006c4:	d3f0      	bcc.n	80006a8 <RTOS_Automatic_Parking+0x1b4>
 			  }
 			  printf("Found the Empty Slot\n");
- 80006be:	4834      	ldr	r0, [pc, #208]	; (8000790 <RTOS_Automatic_Parking+0x29c>)
- 80006c0:	f00b f87c 	bl	800b7bc <puts>
+ 80006c6:	4832      	ldr	r0, [pc, #200]	; (8000790 <RTOS_Automatic_Parking+0x29c>)
+ 80006c8:	f00b f878 	bl	800b7bc <puts>
 
 			  /* Delay to let the car move Forward to half the car length */
 			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 12)))
- 80006c4:	e002      	b.n	80006cc <RTOS_Automatic_Parking+0x1d8>
+ 80006cc:	e002      	b.n	80006d4 <RTOS_Automatic_Parking+0x1e0>
 			  {
 				  printf("Center the car after Founding the Empty Slot\n");
- 80006c6:	4833      	ldr	r0, [pc, #204]	; (8000794 <RTOS_Automatic_Parking+0x2a0>)
- 80006c8:	f00b f878 	bl	800b7bc <puts>
+ 80006ce:	4831      	ldr	r0, [pc, #196]	; (8000794 <RTOS_Automatic_Parking+0x2a0>)
+ 80006d0:	f00b f874 	bl	800b7bc <puts>
 			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 12)))
- 80006cc:	4b2e      	ldr	r3, [pc, #184]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 80006ce:	68db      	ldr	r3, [r3, #12]
- 80006d0:	7bfa      	ldrb	r2, [r7, #15]
- 80006d2:	320c      	adds	r2, #12
- 80006d4:	4293      	cmp	r3, r2
- 80006d6:	d8f6      	bhi.n	80006c6 <RTOS_Automatic_Parking+0x1d2>
- 80006d8:	4b2b      	ldr	r3, [pc, #172]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 80006da:	691b      	ldr	r3, [r3, #16]
- 80006dc:	7bba      	ldrb	r2, [r7, #14]
- 80006de:	320c      	adds	r2, #12
- 80006e0:	4293      	cmp	r3, r2
- 80006e2:	d8f0      	bhi.n	80006c6 <RTOS_Automatic_Parking+0x1d2>
+ 80006d4:	4b2c      	ldr	r3, [pc, #176]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 80006d6:	68db      	ldr	r3, [r3, #12]
+ 80006d8:	7bfa      	ldrb	r2, [r7, #15]
+ 80006da:	320c      	adds	r2, #12
+ 80006dc:	4293      	cmp	r3, r2
+ 80006de:	d8f6      	bhi.n	80006ce <RTOS_Automatic_Parking+0x1da>
+ 80006e0:	4b29      	ldr	r3, [pc, #164]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 80006e2:	691b      	ldr	r3, [r3, #16]
+ 80006e4:	7bba      	ldrb	r2, [r7, #14]
+ 80006e6:	320c      	adds	r2, #12
+ 80006e8:	4293      	cmp	r3, r2
+ 80006ea:	d8f0      	bhi.n	80006ce <RTOS_Automatic_Parking+0x1da>
 			  }
 			  ECU_Motor_MoveReverse(&moving_motor);
- 80006e4:	4826      	ldr	r0, [pc, #152]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 80006e6:	f001 fe61 	bl	80023ac <ECU_Motor_MoveReverse>
+ 80006ec:	4824      	ldr	r0, [pc, #144]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 80006ee:	f001 fe5d 	bl	80023ac <ECU_Motor_MoveReverse>
 			  HAL_Delay(5);
- 80006ea:	2005      	movs	r0, #5
- 80006ec:	f002 f9b0 	bl	8002a50 <HAL_Delay>
+ 80006f2:	2005      	movs	r0, #5
+ 80006f4:	f002 f9ac 	bl	8002a50 <HAL_Delay>
 			  ECU_Motor_Stop(&moving_motor);
- 80006f0:	4823      	ldr	r0, [pc, #140]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 80006f2:	f001 ff53 	bl	800259c <ECU_Motor_Stop>
+ 80006f8:	4821      	ldr	r0, [pc, #132]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 80006fa:	f001 ff4f 	bl	800259c <ECU_Motor_Stop>
 			  //HAL_Delay(100);
 			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
- 80006f6:	4928      	ldr	r1, [pc, #160]	; (8000798 <RTOS_Automatic_Parking+0x2a4>)
- 80006f8:	4821      	ldr	r0, [pc, #132]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 80006fa:	f001 fd4b 	bl	8002194 <ECU_Motor_ChangeSpeed>
+ 80006fe:	4926      	ldr	r1, [pc, #152]	; (8000798 <RTOS_Automatic_Parking+0x2a4>)
+ 8000700:	481f      	ldr	r0, [pc, #124]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000702:	f001 fd47 	bl	8002194 <ECU_Motor_ChangeSpeed>
 			  ECU_Motor_MoveReverseLeft(&moving_motor);
- 80006fe:	4820      	ldr	r0, [pc, #128]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 8000700:	f001 ff1a 	bl	8002538 <ECU_Motor_MoveReverseLeft>
+ 8000706:	481e      	ldr	r0, [pc, #120]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000708:	f001 ff16 	bl	8002538 <ECU_Motor_MoveReverseLeft>
 			  while((ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 12) && (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 15))
- 8000704:	e002      	b.n	800070c <RTOS_Automatic_Parking+0x218>
+ 800070c:	e002      	b.n	8000714 <RTOS_Automatic_Parking+0x220>
 			  {
 				  printf("try to Park 1 Reverse Left\n");
- 8000706:	482b      	ldr	r0, [pc, #172]	; (80007b4 <RTOS_Automatic_Parking+0x2c0>)
- 8000708:	f00b f858 	bl	800b7bc <puts>
+ 800070e:	4829      	ldr	r0, [pc, #164]	; (80007b4 <RTOS_Automatic_Parking+0x2c0>)
+ 8000710:	f00b f854 	bl	800b7bc <puts>
 			  while((ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 12) && (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 15))
- 800070c:	4b1e      	ldr	r3, [pc, #120]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 800070e:	691b      	ldr	r3, [r3, #16]
- 8000710:	2b0c      	cmp	r3, #12
- 8000712:	d903      	bls.n	800071c <RTOS_Automatic_Parking+0x228>
  8000714:	4b1c      	ldr	r3, [pc, #112]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 8000716:	695b      	ldr	r3, [r3, #20]
- 8000718:	2b0f      	cmp	r3, #15
- 800071a:	d8f4      	bhi.n	8000706 <RTOS_Automatic_Parking+0x212>
+ 8000716:	691b      	ldr	r3, [r3, #16]
+ 8000718:	2b0c      	cmp	r3, #12
+ 800071a:	d903      	bls.n	8000724 <RTOS_Automatic_Parking+0x230>
+ 800071c:	4b1a      	ldr	r3, [pc, #104]	; (8000788 <RTOS_Automatic_Parking+0x294>)
+ 800071e:	695b      	ldr	r3, [r3, #20]
+ 8000720:	2b0f      	cmp	r3, #15
+ 8000722:	d8f4      	bhi.n	800070e <RTOS_Automatic_Parking+0x21a>
 			  }
 
 			  ECU_Motor_MoveForward(&moving_motor);
- 800071c:	4818      	ldr	r0, [pc, #96]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 800071e:	f001 fe15 	bl	800234c <ECU_Motor_MoveForward>
+ 8000724:	4816      	ldr	r0, [pc, #88]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000726:	f001 fe11 	bl	800234c <ECU_Motor_MoveForward>
 			  HAL_Delay(5);
- 8000722:	2005      	movs	r0, #5
- 8000724:	f002 f994 	bl	8002a50 <HAL_Delay>
+ 800072a:	2005      	movs	r0, #5
+ 800072c:	f002 f990 	bl	8002a50 <HAL_Delay>
 			  ECU_Motor_Stop(&moving_motor);
- 8000728:	4815      	ldr	r0, [pc, #84]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 800072a:	f001 ff37 	bl	800259c <ECU_Motor_Stop>
+ 8000730:	4813      	ldr	r0, [pc, #76]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000732:	f001 ff33 	bl	800259c <ECU_Motor_Stop>
 			  //while(1){};
 			  //HAL_Delay(100);
 			  ECU_Motor_MoveReverseRight(&moving_motor);
- 800072e:	4814      	ldr	r0, [pc, #80]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
- 8000730:	f001 fed0 	bl	80024d4 <ECU_Motor_MoveReverseRight>
-			  while((ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 4) && (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 4))
- 8000734:	e002      	b.n	800073c <RTOS_Automatic_Parking+0x248>
+ 8000736:	4812      	ldr	r0, [pc, #72]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
+ 8000738:	f001 fecc 	bl	80024d4 <ECU_Motor_MoveReverseRight>
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 10))
+ 800073c:	e002      	b.n	8000744 <RTOS_Automatic_Parking+0x250>
 			  {
 				  printf("try to Park 2 Reverse Right\n");
- 8000736:	4820      	ldr	r0, [pc, #128]	; (80007b8 <RTOS_Automatic_Parking+0x2c4>)
- 8000738:	f00b f840 	bl	800b7bc <puts>
-			  while((ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 4) && (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 4))
- 800073c:	4b12      	ldr	r3, [pc, #72]	; (8000788 <RTOS_Automatic_Parking+0x294>)
- 800073e:	691b      	ldr	r3, [r3, #16]
- 8000740:	2b04      	cmp	r3, #4
- 8000742:	d903      	bls.n	800074c <RTOS_Automatic_Parking+0x258>
+ 800073e:	481e      	ldr	r0, [pc, #120]	; (80007b8 <RTOS_Automatic_Parking+0x2c4>)
+ 8000740:	f00b f83c 	bl	800b7bc <puts>
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 10))
  8000744:	4b10      	ldr	r3, [pc, #64]	; (8000788 <RTOS_Automatic_Parking+0x294>)
  8000746:	695b      	ldr	r3, [r3, #20]
- 8000748:	2b04      	cmp	r3, #4
- 800074a:	d8f4      	bhi.n	8000736 <RTOS_Automatic_Parking+0x242>
+ 8000748:	2b0a      	cmp	r3, #10
+ 800074a:	d8f8      	bhi.n	800073e <RTOS_Automatic_Parking+0x24a>
 			  }
 			  ECU_Motor_MoveForward(&moving_motor);
  800074c:	480c      	ldr	r0, [pc, #48]	; (8000780 <RTOS_Automatic_Parking+0x28c>)
