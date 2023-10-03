@@ -2,4 +2,4 @@
 ../Core/Src/freertos.c:207:6:DefaultTask	16	static
 ../Core/Src/freertos.c:234:6:RTOS_Ultrasonics_Read	16	static
 ../Core/Src/freertos.c:289:6:RTOS_Car_Next_Step	16	static
-../Core/Src/freertos.c:328:6:RTOS_Automatic_Parking	24	static
+../Core/Src/freertos.c:328:6:RTOS_Automatic_Parking	32	static

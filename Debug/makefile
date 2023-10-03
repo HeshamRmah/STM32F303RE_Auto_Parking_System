@@ -79,7 +79,7 @@ main-build: STM32F303RE_Auto_Parking_System.elf secondary-outputs
 
 # Tool invocations
 STM32F303RE_Auto_Parking_System.elf STM32F303RE_Auto_Parking_System.map: $(OBJS) $(USER_OBJS) C:\Users\Hesham\Desktop\NTI\STM32IDE\STM32F303RE_Auto_Parking_System\STM32F303RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32F303RE_Auto_Parking_System.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Hesham\Desktop\NTI\STM32IDE\STM32F303RE_Auto_Parking_System\STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F303RE_Auto_Parking_System.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "STM32F303RE_Auto_Parking_System.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Hesham\Desktop\NTI\STM32IDE\STM32F303RE_Auto_Parking_System\STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F303RE_Auto_Parking_System.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

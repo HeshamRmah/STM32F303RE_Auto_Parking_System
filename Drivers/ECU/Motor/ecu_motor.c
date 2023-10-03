@@ -10,9 +10,9 @@
 
 motor_speed_t high_speed   = {.Frequency = 25000, .Duty_Cycle = 0.9};
 
-motor_speed_t medium_speed = {.Frequency = 25000, .Duty_Cycle = 0.849};
+motor_speed_t medium_speed = {.Frequency = 25000, .Duty_Cycle = 0.847};
 
-motor_speed_t low_speed    = {.Frequency = 25000, .Duty_Cycle = 0.74};
+motor_speed_t low_speed    = {.Frequency = 25000, .Duty_Cycle = 0.77};
 
 
 /**

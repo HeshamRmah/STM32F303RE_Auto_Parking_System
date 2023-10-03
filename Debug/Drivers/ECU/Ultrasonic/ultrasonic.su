@@ -2,4 +2,4 @@
 ../Drivers/ECU/Ultrasonic/ultrasonic.c:64:19:ECU_Ultrasonic_Read	16	static
 ../Drivers/ECU/Ultrasonic/ultrasonic.c:79:26:ECU_Ultrasonic_GenerateTrigger	24	static
 ../Drivers/ECU/Ultrasonic/ultrasonic.c:104:13:IC_first_Capture	24	static
-../Drivers/ECU/Ultrasonic/ultrasonic.c:119:13:IC_second_Capture	24	static
+../Drivers/ECU/Ultrasonic/ultrasonic.c:119:13:IC_second_Capture	32	static

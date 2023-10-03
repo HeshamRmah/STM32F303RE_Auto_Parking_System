@@ -21,7 +21,7 @@
 /* ----------------- Data Type Declarations -----------------*/
 
 /* Global Array to save each ultrasonic distance value */
-extern volatile uint32_t ultrasonic_Distance_Values[ULTRASONIC_SENSOR_NUMBER];
+extern volatile double ultrasonic_Distance_Values[ULTRASONIC_SENSOR_NUMBER];
 
 /* Global ultrasonic index to select which sensor to update its value */
 extern volatile uint8_t sensor_index;

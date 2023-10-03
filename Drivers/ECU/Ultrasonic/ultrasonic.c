@@ -8,7 +8,7 @@
 #include "ultrasonic.h"
 
 /* Global Array to save each ultrasonic distance value */
-volatile uint32_t ultrasonic_Distance_Values[ULTRASONIC_SENSOR_NUMBER];
+volatile double ultrasonic_Distance_Values[ULTRASONIC_SENSOR_NUMBER];
 
 /* Global ultrasonic index to select which sensor to update its value */
 volatile uint8_t sensor_index = 0;
