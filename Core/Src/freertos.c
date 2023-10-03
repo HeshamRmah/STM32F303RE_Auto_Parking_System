@@ -330,6 +330,7 @@ void RTOS_Automatic_Parking(void *argument)
   /* USER CODE BEGIN RTOS_Automatic_Parking */
 	uint8_t front_ultrasonic = 0;
 	uint8_t rear_ultrasonic = 0;
+	uint32_t time_out = 0;
   /* Infinite loop */
   for(;;)
   {
@@ -365,9 +366,15 @@ void RTOS_Automatic_Parking(void *argument)
 			  printf("Found the Empty Slot\n");
 
 			  /* Delay to let the car move Forward to about car length */
-			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 15)))
+			  while((ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 17)) || (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 15)))
 			  {
 				  printf("Centering the car after Finding the Empty Slot\n");
+				  time_out++;
+				  if(time_out == 0xfff){
+					  time_out = 0;
+					  break;
+				  }
+				  else {/* DO NOTHING */}
 			  }
 
 			  /* Breaking Sequence */
@@ -379,8 +386,8 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
 
 			  ECU_Motor_MoveReverse();
-			  HAL_Delay(800);
-			  //ECU_Motor_Stop();
+			  HAL_Delay(1000);
+			  ECU_Motor_Stop();
 
 			  /* MoveReverseRight so the car rear can enter the Empty Slot */
 			  ECU_Motor_MoveReverseRight();
@@ -463,58 +470,111 @@ void RTOS_Automatic_Parking(void *argument)
 		  else if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) == LEFT_PARKING_SIDE)
 		  {
 			  printf("Park Left Side\n");
+
+			  /* storing the ultra-sonic initial distance before parking */
 			  front_ultrasonic = ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX];
 			  rear_ultrasonic = ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX];
+
+			  /* MoveForward so it can Searching for Empty Slot */
 			  ECU_Motor_MoveForward();
-			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 12)))
+			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] < (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] < (rear_ultrasonic + 15)))
 			  {
+				  printf("LeftFront_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX]);
+				  printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
 				  printf("Searching for Empty Slot\n");
 			  }
 			  printf("Found the Empty Slot\n");
 
-			  /* Delay to let the car move Forward to half the car length */
-			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 12)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 12)))
+			  /* Delay to let the car move Forward to about car length */
+			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] > (front_ultrasonic + 15)) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > (rear_ultrasonic + 15)))
 			  {
-				  printf("Center the car after Founding the Empty Slot\n");
-			  }
-//			  ECU_Motor_MoveReverse();
-//			  HAL_Delay(5);
-			  ECU_Motor_Stop();
-			  //HAL_Delay(100);
-			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
-			  ECU_Motor_MoveReverseLeft();
-			  while((ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 12) && (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 15))
-			  {
-				  printf("try to Park 1 Reverse Left\n");
+				  printf("Centering the car after Finding the Empty Slot\n");
 			  }
 
-//			  ECU_Motor_MoveForward();
-//			  HAL_Delay(5);
+			  /* Breaking Sequence */
+			  ECU_Motor_MoveReverse();
+			  HAL_Delay(5);
 			  ECU_Motor_Stop();
-			  //while(1){};
-			  //HAL_Delay(100);
-			  ECU_Motor_MoveReverseRight();
-			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 10))
+
+			  /* reduce the speed while Reversing to deal with motor hardware inefficiency */
+			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
+
+			  ECU_Motor_MoveReverse();
+			  HAL_Delay(1000);
+			  ECU_Motor_Stop();
+
+			  /* MoveReverseLeft so the car rear can enter the Empty Slot */
+			  ECU_Motor_MoveReverseLeft();
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 30))
 			  {
-				  printf("try to Park 2 Reverse Right\n");
+				  //printf("IR_Left_Rear in = %d",ECU_IR_IsActive(&IR_Left_Rear));
+				  printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
+				  printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
+				  printf("trying to Park 1 Reverse Left\n");
 			  }
+			  printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
+			  printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
+			  /* Breaking Sequence */
 			  ECU_Motor_MoveForward();
 			  HAL_Delay(5);
-			  ECU_Motor_ChangeSpeed(&moving_motor, &medium_speed);
-			  ECU_Motor_Stop();
-			  ECU_Motor_MoveForwardLeft();
-			  while((ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] > 4) || (ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 4))
-			  {
-				  printf("try to Park 3 Forward Left\n");
-			  }
-//			  ECU_Motor_MoveReverse();
-//			  HAL_Delay(5);
 			  ECU_Motor_Stop();
 
+			  /* ReverseRight to Adjust the position better in the slot */
+			  ECU_Motor_MoveReverseRight();
+			  while((ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX] > 4) && (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 4))
+			  {
+				  printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
+				  printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
+				  printf("trying to Park 2 Reverse Right\n");
+			  }
+			  printf("Rear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX]);
+			  printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
+
+			  /* Breaking Sequence */
+			  ECU_Motor_MoveForward();
+			  HAL_Delay(5);
+			  ECU_Motor_Stop();
+
+			  /* return the speed back to parking speed */
+			  ECU_Motor_ChangeSpeed(&moving_motor, &medium_speed);
+
+			  /* MoveForwardLeft to Adjust the position of the front of the car */
+			  ECU_Motor_MoveForwardLeft();
+			  while((ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX] > 5) && (ultrasonic_Distance_Values[LEFT_FRONT_ULTRASONIC_INDEX] > 11))
+			  {
+				  printf("trying to Park 3 Forward Left\n");
+			  }
+
+			  /* Breaking Sequence */
+			  ECU_Motor_MoveReverse();
+			  HAL_Delay(5);
+			  ECU_Motor_Stop();
+
+			  /* reduce the speed while Reversing to deal with motor hardware inefficiency */
+			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
+
+			  /* ReverseRight to Adjust the position better in the slot */
+			  ECU_Motor_MoveReverseRight();
+			  HAL_Delay(300);
+			  ECU_Motor_Stop();
+
+			  /* MoveReverse to Adjust the position better in the slot */
+			  ECU_Motor_MoveReverse();
+			  while( (ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 20) )
+			  {
+				  printf("try to Park 4 Reverse \n");
+			  }
+
+			  /* Breaking Sequence */
+			  ECU_Motor_MoveForward();
+			  HAL_Delay(5);
+			  ECU_Motor_Stop();
+
+			  /* terminating the Auto Parking mode */
 			  printf("Finally ... the car should be parked successfully by now\n");
 			  osEventFlagsClear(Car_modeHandle, CAR_CONTROL_BIT);
 			  ECU_Motor_ChangeSpeed(&moving_motor, &high_speed);
-			  Bluetooth_RX_Data = 'S';
+			  //Bluetooth_RX_Data = 'S';
 		  }
 		  else{/* DO NOTHING */}
 

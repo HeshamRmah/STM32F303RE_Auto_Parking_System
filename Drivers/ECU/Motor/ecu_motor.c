@@ -17,6 +17,7 @@ motor_speed_t low_speed    = {.Frequency = 25000, .Duty_Cycle = 0.74};
 
 /**
   * @brief  Starts the PWM signal generation.
+  *
   * @param  motor_obj Motor handle
   * @param  Period of the PWM signal in Microseconds
   * @param  Duty Cycle for the generated wave
