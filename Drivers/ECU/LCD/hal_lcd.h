@@ -54,6 +54,8 @@ typedef struct{
 	pin_cfg_t lcd_data[4];
 }chr_lcd_4bit_t;
 
+extern chr_lcd_4bit_t lcd;
+
 /* ----------------- Software Interfaces Declarations -----------------*/
 Std_ReturnType lcd_4bit_intialize(const chr_lcd_4bit_t *lcd);
 Std_ReturnType lcd_4bit_send_command(const chr_lcd_4bit_t *lcd, uint8 command);

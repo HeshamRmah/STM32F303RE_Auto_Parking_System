@@ -54,8 +54,11 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, LD2_Pin|STEERING_MOTOR_EN_Pin|MOVING_MOTOR_NEGITVE_Pin|MOVING_MOTOR_POSITIVE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LCD_RS_Pin|LCD_EN_Pin|LCD_DATA_0_Pin|LCD_DATA_1_Pin
-                          |LCD_DATA_2_Pin|LCD_DATA_3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LCD_RS_Pin|LCD_DATA_0_Pin|LCD_DATA_1_Pin|LCD_DATA_2_Pin
+                          |LCD_DATA_3_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LCD_EN_GPIO_Port, LCD_EN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, STEERING_MOTOR_NEGITVE_Pin|STEERING_MOTOR_POSITIVE_Pin, GPIO_PIN_RESET);
@@ -73,6 +76,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = IR_Left_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(IR_Left_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin
                            PBPin PBPin */
   GPIO_InitStruct.Pin = LCD_RS_Pin|LCD_EN_Pin|LCD_DATA_0_Pin|LCD_DATA_1_Pin
@@ -88,6 +97,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = IR_RIGHT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(IR_RIGHT_GPIO_Port, &GPIO_InitStruct);
 
 }
 

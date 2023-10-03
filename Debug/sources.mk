@@ -26,6 +26,8 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 Drivers/ECU/Bluetooth \
+Drivers/ECU/Busser \
+Drivers/ECU/IR \
 Drivers/ECU/LCD \
 Drivers/ECU/Motor \
 Drivers/ECU/Ultrasonic \

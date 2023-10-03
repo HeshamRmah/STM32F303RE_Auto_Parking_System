@@ -22,6 +22,8 @@ RM := rm -rf
 -include Drivers/ECU/Ultrasonic/subdir.mk
 -include Drivers/ECU/Motor/subdir.mk
 -include Drivers/ECU/LCD/subdir.mk
+-include Drivers/ECU/IR/subdir.mk
+-include Drivers/ECU/Busser/subdir.mk
 -include Drivers/ECU/Bluetooth/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk

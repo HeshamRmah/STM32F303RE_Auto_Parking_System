@@ -87,46 +87,46 @@ ECU_StatusTypeDef ECU_Motor_NextStep(motor_obj_t *motor_obj, uint8_t *direction)
 /**
   * @brief  Move the Car Forward.
   */
-ECU_StatusTypeDef ECU_Motor_MoveForward(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveForward();
 
 /**
   * @brief  Move the Car Reverse.
   */
-ECU_StatusTypeDef ECU_Motor_MoveReverse(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveReverse();
 
 /**
   * @brief  Move the Car Forward Right.
   */
-ECU_StatusTypeDef ECU_Motor_MoveForwardRight(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveForwardRight();
 
 /**
   * @brief  Move the Car Forward Left.
   */
-ECU_StatusTypeDef ECU_Motor_MoveForwardLeft(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveForwardLeft();
 
 /**
   * @brief  Move the Car Reverse Right.
   */
-ECU_StatusTypeDef ECU_Motor_MoveReverseRight(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveReverseRight();
 
 /**
   * @brief  Move the Car Reverse Left.
   */
-ECU_StatusTypeDef ECU_Motor_MoveReverseLeft(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveReverseLeft();
 
 /**
   * @brief  Stop the Car.
   */
-ECU_StatusTypeDef ECU_Motor_Stop(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_Stop();
 
 /**
   * @brief  Move the Steering Motor Right.
   */
-ECU_StatusTypeDef ECU_Motor_MoveRight(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveRight();
 
 /**
   * @brief  Move the Steering Motor Left.
   */
-ECU_StatusTypeDef ECU_Motor_MoveLeft(motor_obj_t *motor_obj);
+ECU_StatusTypeDef ECU_Motor_MoveLeft();
 
 #endif /* INC_ECU_MOTOR_H_ */

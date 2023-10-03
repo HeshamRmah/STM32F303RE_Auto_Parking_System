@@ -10,9 +10,9 @@
 
 motor_speed_t high_speed   = {.Frequency = 25000, .Duty_Cycle = 0.9};
 
-motor_speed_t medium_speed = {.Frequency = 25000, .Duty_Cycle = 0.845};
+motor_speed_t medium_speed = {.Frequency = 25000, .Duty_Cycle = 0.849};
 
-motor_speed_t low_speed    = {.Frequency = 25000, .Duty_Cycle = 0.73};
+motor_speed_t low_speed    = {.Frequency = 25000, .Duty_Cycle = 0.74};
 
 
 /**
@@ -124,19 +124,19 @@ ECU_StatusTypeDef ECU_Motor_NextStep(motor_obj_t *motor_obj, uint8_t *direction)
 	/* Stop the PWM signal generation */
 	switch(*direction)
 	{
-		case FORWARD:       ECU_Motor_MoveForward     (motor_obj); break;
-		case REVERSE:       ECU_Motor_MoveReverse     (motor_obj); break;
-		case FORWARD_LEFT:  ECU_Motor_MoveForwardLeft (motor_obj); break;
-		case FORWARD_RIGHT: ECU_Motor_MoveForwardRight(motor_obj); break;
-		case REVERSE_LEFT:  ECU_Motor_MoveReverseLeft (motor_obj); break;
-		case REVERSE_RIGHT: ECU_Motor_MoveReverseRight(motor_obj); break;
-		case RIGHT:         ECU_Motor_MoveRight       (motor_obj); break;
-		case LEFT:          ECU_Motor_MoveLeft        (motor_obj); break;
-		case STOP:          ECU_Motor_Stop            (motor_obj); break;
+		case FORWARD:       ECU_Motor_MoveForward     (); break;
+		case REVERSE:       ECU_Motor_MoveReverse     (); break;
+		case FORWARD_LEFT:  ECU_Motor_MoveForwardLeft (); break;
+		case FORWARD_RIGHT: ECU_Motor_MoveForwardRight(); break;
+		case REVERSE_LEFT:  ECU_Motor_MoveReverseLeft (); break;
+		case REVERSE_RIGHT: ECU_Motor_MoveReverseRight(); break;
+		case RIGHT:         ECU_Motor_MoveRight       (); break;
+		case LEFT:          ECU_Motor_MoveLeft        (); break;
+		case STOP:          ECU_Motor_Stop            (); break;
 		case HIGH_SPEED:    ECU_Motor_ChangeSpeed     (motor_obj, &high_speed);
 		case MEDIUM_SPEED:  ECU_Motor_ChangeSpeed     (motor_obj, &medium_speed);
 		case LOW_SPEED:     ECU_Motor_ChangeSpeed     (motor_obj, &low_speed);
-		default:            ECU_Motor_Stop            (motor_obj); break;
+		default:            ECU_Motor_Stop            (); break;
 	}
 
 	return ECU_OK;
@@ -145,19 +145,14 @@ ECU_StatusTypeDef ECU_Motor_NextStep(motor_obj_t *motor_obj, uint8_t *direction)
 /**
   * @brief  Move the Car Forward.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveForward(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveForward(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("Motor_MoveForward\n");
+	//printf("Motor_MoveForward\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEERING_MOTOR_PORT, STEERING_MOTOR_POSITIVE_PIN, GPIO_PIN_RESET);
@@ -172,19 +167,14 @@ ECU_StatusTypeDef ECU_Motor_MoveForward(motor_obj_t *motor_obj){
 /**
   * @brief  Move the Car Reverse.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveReverse(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveReverse(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("MoveReverse\n");
+	//printf("MoveReverse\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(STEERING_MOTOR_PORT, STEERING_MOTOR_POSITIVE_PIN, GPIO_PIN_RESET);
@@ -199,19 +189,14 @@ ECU_StatusTypeDef ECU_Motor_MoveReverse(motor_obj_t *motor_obj){
 /**
   * @brief  Move the Car Forward Right.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveForwardRight(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveForwardRight(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("MoveForwardRight\n");
+	//printf("MoveForwardRight\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 
@@ -227,19 +212,14 @@ ECU_StatusTypeDef ECU_Motor_MoveForwardRight(motor_obj_t *motor_obj){
 /**
   * @brief  Move the Car Forward Left.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveForwardLeft(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveForwardLeft(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("MoveForwardLeft\n");
+	//printf("MoveForwardLeft\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 
@@ -256,19 +236,14 @@ ECU_StatusTypeDef ECU_Motor_MoveForwardLeft(motor_obj_t *motor_obj){
 /**
   * @brief  Move the Car Reverse Right.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveReverseRight(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveReverseRight(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("MoveReverseRight\n");
+	//printf("MoveReverseRight\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 
@@ -284,19 +259,14 @@ ECU_StatusTypeDef ECU_Motor_MoveReverseRight(motor_obj_t *motor_obj){
 /**
   * @brief  Move the Car Reverse Left.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveReverseLeft(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveReverseLeft(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("MoveReverseLeft\n");
+	//printf("MoveReverseLeft\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 
@@ -312,19 +282,14 @@ ECU_StatusTypeDef ECU_Motor_MoveReverseLeft(motor_obj_t *motor_obj){
 /**
   * @brief  Stop the Car.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_Stop(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_Stop(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("Stop\n");
+	//printf("Stop\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_RESET);
 
@@ -352,7 +317,7 @@ ECU_StatusTypeDef ECU_Motor_MoveRight(motor_obj_t *motor_obj){
 		return ECU_ERROR;
 	}
 
-	printf("MoveRight\n");
+	//printf("MoveRight\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 
@@ -368,19 +333,14 @@ ECU_StatusTypeDef ECU_Motor_MoveRight(motor_obj_t *motor_obj){
 /**
   * @brief  Move the Steering Motor Left.
   *
-  * @param  motor_obj: Motor handle
+  * @param
   *
   * @retval ECU status
   */
-ECU_StatusTypeDef ECU_Motor_MoveLeft(motor_obj_t *motor_obj){
+ECU_StatusTypeDef ECU_Motor_MoveLeft(){
 
-	/* Check NULL Pointer */
-	if (NULL == motor_obj)
-	{
-		return ECU_ERROR;
-	}
 
-	printf("MoveLeft\n");
+	//printf("MoveLeft\n");
 
 	//HAL_GPIO_WritePin(STEERING_MOTOR_EN_PORT, STEERING_MOTOR_EN_PIN, GPIO_PIN_SET);
 

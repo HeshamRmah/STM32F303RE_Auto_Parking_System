@@ -55,7 +55,11 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Core/Src/../../Drivers/ECU/Ultrasonic/../ECU_std_types.h \
  ../Core/Src/../../Drivers/ECU/Bluetooth/bluetooth.h \
  ../Core/Src/../../Drivers/ECU/Bluetooth/../Motor/ecu_motor.h \
- ../Core/Src/../../Drivers/ECU/Bluetooth/../ECU_std_types.h
+ ../Core/Src/../../Drivers/ECU/Bluetooth/../ECU_std_types.h \
+ ../Core/Src/../../Drivers/ECU/IR/ecu_ir.h \
+ ../Core/Src/../../Drivers/ECU/IR/../ECU_std_types.h \
+ ../Core/Src/../../Drivers/ECU/Busser/busser.h \
+ ../Core/Src/../../Drivers/ECU/Busser/../ECU_std_types.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -116,3 +120,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Core/Src/../../Drivers/ECU/Bluetooth/bluetooth.h:
 ../Core/Src/../../Drivers/ECU/Bluetooth/../Motor/ecu_motor.h:
 ../Core/Src/../../Drivers/ECU/Bluetooth/../ECU_std_types.h:
+../Core/Src/../../Drivers/ECU/IR/ecu_ir.h:
+../Core/Src/../../Drivers/ECU/IR/../ECU_std_types.h:
+../Core/Src/../../Drivers/ECU/Busser/busser.h:
+../Core/Src/../../Drivers/ECU/Busser/../ECU_std_types.h:

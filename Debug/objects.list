@@ -11,6 +11,8 @@
 "./Core/Src/usart.o"
 "./Core/Startup/startup_stm32f303retx.o"
 "./Drivers/ECU/Bluetooth/bluetooth.o"
+"./Drivers/ECU/Busser/busser.o"
+"./Drivers/ECU/IR/ecu_ir.o"
 "./Drivers/ECU/LCD/hal_lcd.o"
 "./Drivers/ECU/Motor/ecu_motor.o"
 "./Drivers/ECU/Ultrasonic/ultrasonic.o"

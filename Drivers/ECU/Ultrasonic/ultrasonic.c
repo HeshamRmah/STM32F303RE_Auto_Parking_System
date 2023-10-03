@@ -131,7 +131,7 @@ static void IC_second_Capture(TIM_HandleTypeDef *htim, uint32_t *IC_Val1, uint32
 	else{
 		// only if there is an overflow (very unlikely scenario)
 		*IC_difference = (0xffff - *IC_Val1) + (*IC_Val2);
-		printf("sensor %d --------> overflow\n",sensor_index+1);
+		//printf("sensor %d --------> overflow\n",sensor_index+1);
 	}
 
 	/* Update the desired ultrasonic distance value */

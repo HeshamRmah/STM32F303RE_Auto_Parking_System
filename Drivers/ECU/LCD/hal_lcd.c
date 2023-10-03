@@ -12,6 +12,14 @@ static Std_ReturnType lcd_send_4bits(const chr_lcd_4bit_t *lcd, uint8 _data_comm
 static Std_ReturnType lcd_4bit_send_enable_signal(const chr_lcd_4bit_t *lcd);
 static Std_ReturnType lcd_4bit_set_cursor(const chr_lcd_4bit_t *lcd, uint8 row, uint8 coulmn);
 
+chr_lcd_4bit_t lcd = {
+	.lcd_data[0].port = GPIOB, .lcd_data[0].pin = GPIO_PIN_10,
+	.lcd_data[1].port = GPIOB, .lcd_data[1].pin = GPIO_PIN_11,
+	.lcd_data[2].port = GPIOB, .lcd_data[2].pin = GPIO_PIN_12,
+	.lcd_data[3].port = GPIOB, .lcd_data[3].pin = GPIO_PIN_13,
+	.lcd_rs.port = GPIOB, .lcd_rs.pin = GPIO_PIN_1,
+	.lcd_en.port = GPIOB, .lcd_en.pin = GPIO_PIN_2};
+
 /**
  * 
  * @param lcd
