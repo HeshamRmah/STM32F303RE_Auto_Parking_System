@@ -418,7 +418,7 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_Stop();
 
 			  /* return the speed back to parking speed */
-			  ECU_Motor_ChangeSpeed(&moving_motor, &medium_speed);
+			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
 
 			  /* MoveForwardRight to Adjust the position of the front of the car */
 			  ECU_Motor_MoveForwardRight();
@@ -453,7 +453,7 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_Stop();
 
 			  ECU_Motor_MoveForwardRight(&moving_motor);
-			  while((ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX] > 10 ) && (ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > 9) /*&& (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 4)*/)
+			  while((ultrasonic_Distance_Values[FRONT_ULTRASONIC_INDEX] > 10 ) && (ultrasonic_Distance_Values[RIGHT_FRONT_ULTRASONIC_INDEX] > 12) /*&& (ultrasonic_Distance_Values[RIGHT_REAR_ULTRASONIC_INDEX] > 4)*/)
 			  {
 				  printf("try to Park 5 Forward Right\n");
 			  }
@@ -462,7 +462,7 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_Stop();
 
 		  }
-		  /* Selected Left Side to Park */
+		  /* ----------------------------------------------- Selected Left Side to Park -------------------------------------------- */
 		  else if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) == LEFT_PARKING_SIDE)
 		  {
 			  printf("Park Left Side\n");
@@ -502,7 +502,7 @@ void RTOS_Automatic_Parking(void *argument)
 
 			  /* MoveReverseLeft so the car rear can enter the Empty Slot */
 			  ECU_Motor_MoveReverseLeft();
-			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 30))
+			  while((ultrasonic_Distance_Values[REAR_ULTRASONIC_INDEX] > 20))
 			  {
 				  //printf("IR_Left_Rear in = %d",ECU_IR_IsActive(&IR_Left_Rear));
 				  //printf("LeftRear_ultrasonic distance is %lu\n",ultrasonic_Distance_Values[LEFT_REAR_ULTRASONIC_INDEX]);
@@ -534,7 +534,7 @@ void RTOS_Automatic_Parking(void *argument)
 			  ECU_Motor_Stop();
 
 			  /* return the speed back to parking speed */
-			  ECU_Motor_ChangeSpeed(&moving_motor, &medium_speed);
+			  ECU_Motor_ChangeSpeed(&moving_motor, &low_speed);
 
 			  /* MoveForwardLeft to Adjust the position of the front of the car */
 			  ECU_Motor_MoveForwardLeft();
