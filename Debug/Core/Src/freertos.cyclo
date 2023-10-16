@@ -1,5 +1,5 @@
 ../Core/Src/freertos.c:147:6:MX_FREERTOS_Init	1
 ../Core/Src/freertos.c:207:6:DefaultTask	1
-../Core/Src/freertos.c:234:6:RTOS_Ultrasonics_Read	3
-../Core/Src/freertos.c:289:6:RTOS_Car_Next_Step	4
-../Core/Src/freertos.c:328:6:RTOS_Automatic_Parking	31
+../Core/Src/freertos.c:235:6:RTOS_Ultrasonics_Read	4
+../Core/Src/freertos.c:296:6:RTOS_Car_Next_Step	4
+../Core/Src/freertos.c:335:6:RTOS_Automatic_Parking	30

@@ -217,6 +217,7 @@ void DefaultTask(void *argument)
   {
 	  //printf("DefaultTask is Running\n");
 	  osThreadSuspend(Automatic_ParkingHandle);
+
 	  /* Suspend itself */
 	  osThreadSuspend(osThreadGetId());
     osDelay(1000);
@@ -245,8 +246,14 @@ void RTOS_Ultrasonics_Read(void *argument)
 	  else{
 		  ECU_Busser_StopPWM(&busser);
 	  }*/
-	  printf("IR_Right_Rear in = %d\n",ECU_IR_IsActive(&IR_Right_Rear));
-	  printf("IR_Left_Rear in = %d\n",ECU_IR_IsActive(&IR_Left_Rear));
+	  //printf("IR_Right_Rear in = %d\n",ECU_IR_IsActive(&IR_Right_Rear));
+	  //printf("IR_Left_Rear in = %d\n",ECU_IR_IsActive(&IR_Left_Rear));
+
+	  if( (Bluetooth_RX_Data == AUTO_PARK_OFF) ){
+		  osEventFlagsClear(Car_modeHandle, CAR_CONTROL_BIT);
+		  osThreadSuspend(Automatic_ParkingHandle);
+	  }
+	  else{/* DO NOTHING */}
 
 	  if((osEventFlagsGet(Car_modeHandle) & PARKING_SIDE_BIT) == RIGHT_PARKING_SIDE)
 	  {
@@ -334,10 +341,6 @@ void RTOS_Automatic_Parking(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  if( (Bluetooth_RX_Data == AUTO_PARK_OFF) ){
-		  osEventFlagsClear(Car_modeHandle, CAR_CONTROL_BIT);
-	  }
-	  else{/* DO NOTHING */}
 
 	  if( (osEventFlagsGet(Car_modeHandle) & CAR_CONTROL_BIT) == AUTOMATIC_PARKING_MODE)
 	  {
@@ -580,14 +583,17 @@ void RTOS_Automatic_Parking(void *argument)
 		  else{/* DO NOTHING */}
 
 		  /* terminating the Auto Parking mode */
-		  printf("Finally ... the car should be parked successfully by now\n");
+		  //printf("Finally ... the car should be parked successfully by now\n");
 		  osEventFlagsClear(Car_modeHandle, CAR_CONTROL_BIT);
 		  ECU_Motor_ChangeSpeed(&moving_motor, &high_speed);
 		  //Bluetooth_RX_Data = 'S';
-		  osThreadResume(car_next_stepHandle);
-		  osThreadSuspend(Automatic_ParkingHandle);
+
 	  }
 	  else{/* DO NOTHING */}
+
+	  osThreadResume(car_next_stepHandle);
+	  osThreadSuspend(Automatic_ParkingHandle);
+
     osDelay(120000);
   }
   /* USER CODE END RTOS_Automatic_Parking */
